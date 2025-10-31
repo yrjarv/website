@@ -1,0 +1,1354 @@
+/* Patternfly CSS places a "bg-login.jpg" as the background on this ".login-pf" class.
+This clashes with the "keycloak-bg.png' background defined on the body below.
+Therefore the Patternfly background must be set to none. */
+
+/*******************************************************************************
+UiO App
+Global styles
+*******************************************************************************/
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: helvetica, arial, sans-serif;
+  font-size: 62.5%; /* 1rem = 10px */
+  line-height: 1.5;
+}
+
+body {
+  margin: 0;
+  font-size: 1.8rem;
+  /* font-smoothing is macOS only. may not be ideal for all fonts. test. */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img {
+  max-width: 100%;
+}
+
+p {
+  margin: 0 0 20px 0;
+}
+
+a {
+  text-underline-offset: .2em;
+  text-decoration-thickness: .05em;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+/*******************************************************************************
+Language handling. Hide elements depending on html lang.
+*******************************************************************************/
+
+html[lang="nb"] .language-dependent:not(.lang-nb),
+html[lang="no"] .language-dependent:not(.lang-no),
+html[lang="en"] .language-dependent:not(.lang-en) {
+  display: none;
+}
+
+/*******************************************************************************
+invisible: Hidden from view, but accessible for screen-readers.
+skip-link: Used to skip blocks of navigation. Only visible on keyboard focus.
+*******************************************************************************/
+
+.invisible,
+.skip-link:not(:focus) {
+  position: absolute;
+  left: -100000px;
+}
+
+.skip-link {
+  display: block;
+  text-align: center;
+  margin: 5px;
+}
+
+/*******************************************************************************
+app-global-wrapper
+
+- Controls global side-spacing and width.
+- Important: This is used in all outer containers of the framework.
+- Changing these styles, will also affect header and footer.
+- To edit the app area only, see app-main css.
+*******************************************************************************/
+
+.app-global-wrapper {
+  box-sizing: content-box; /* max-width = max content width */
+  padding: 0 25px;
+  margin: 0 auto;
+  max-width: 1400px;
+}
+
+@media (max-width: 1100px) {
+  .app-global-wrapper {
+    padding: 0 15px;
+  }
+}
+
+
+/*******************************************************************************
+UiO App
+App-main styles
+********************************************************************************
+
+
+********************************************************************************
+app-main
+
+- Set top/bottom spacing of app-main area.
+- Setting side-spacing (left/right padding/margin) is not recommended.
+*******************************************************************************/
+
+#app-main {
+  padding-top: 25px;
+  padding-bottom: 50px;
+}
+
+
+/*******************************************************************************
+app-global-wrapper
+
+- This has global styles (see app-global css).
+- App can have max-width different from global if desired.
+- Changing side-spacing (left/right padding/margin) is not recommended.
+- Background image and height can be freely edited or removed.
+*******************************************************************************/
+
+#app-main .app-global-wrapper {
+  background: url("../images/app.svg") no-repeat center;
+  min-height: 400px;
+}
+
+
+/*******************************************************************************
+UiO App
+Header styles
+*******************************************************************************/
+
+
+/*******************************************************************************
+header-uio-identity with logo
+*******************************************************************************/
+
+#header-uio-identity {
+  background: #18191c;
+  padding: 20px 0;
+  margin: 0;
+}
+
+#header-uio-identity * {
+  color: #fff;
+}
+
+#header-uio-logo {
+  background: url("../img/uio-logo-name-no-neg.svg") no-repeat;
+  background-size: contain;
+  display: block;
+  height: 28px;
+  width: 200px;
+}
+
+#header-uio-logo span {
+  visibility: visible; /* override patternfly .invisible class */
+}
+
+/* english logo set from lang attribute */
+html[lang="en"] #header-uio-logo {
+  background-image: url("../img/uio-logo-name-en-neg.svg");
+}
+
+/*******************************************************************************
+app-header-core with app name and menus
+*******************************************************************************/
+
+#app-header-core {
+  font-size: 1.6rem;
+  border-bottom: 1px solid #888;
+  background-color: white;
+}
+
+#app-header-core .app-global-wrapper {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  grid-column-gap: 20px;
+}
+
+#header-appname {
+  line-height: 1.2;
+  margin: 15px 0;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+
+/* large screen */
+@media (min-width: 767px) {
+  #app-header-core .app-global-wrapper {
+    align-items: center;
+    min-height: 90px;
+  }
+  #header-appname {
+    /* font-size: 3rem;*/
+  }
+}
+
+/* small screen */
+@media (max-width: 767px) {
+  #app-header-core .app-global-wrapper {
+    overflow: hidden;
+  }
+  #header-appname {
+    font-size: 2.3rem;
+  }
+}
+
+/* app-header-core links and buttons */
+
+#app-header-core a {
+  text-decoration: none;
+  color: inherit;
+  font-size: 2rem;
+}
+
+#app-header-core button {
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: inherit;
+  color: inherit;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+
+#app-header-core button[disabled] {
+  cursor: default;
+}
+
+#app-header-core button[disabled]:hover {
+  text-decoration: none;
+}
+
+/*******************************************************************************
+responsive-menu-button (for small screens)
+*******************************************************************************/
+
+#app-header-core #responsive-menu-button {
+  background: #fff url("../img/settings.svg") no-repeat center;
+  width: 40px;
+  height: 40px;
+  margin-top: 9px;
+  /* if rare case overlap */
+  position: relative;
+  z-index: 1;
+}
+
+/* large screen */
+@media (min-width: 1101px) {
+  #app-header-core #responsive-menu-button {
+    display: none;
+  }
+}
+
+/*******************************************************************************
+header-menu
+*******************************************************************************/
+
+#header-menu {
+  display: grid;
+  grid-gap: 25px;
+}
+
+/* large screen */
+@media (min-width: 1px) {
+  #header-menu {
+    grid-auto-flow: column;
+  }
+}
+
+/* small screen */
+@media (max-width: 1101px) {
+  #header-menu {
+    grid-row-start: 1;
+    margin: 20px 0;
+  }
+  /* header-menu hidden unless expanded */
+  /* appname hidden when menu is expanded */
+  #app-header-core:not(.responsive-menu-expanded) #header-menu,
+  #app-header-core.responsive-menu-expanded #header-appname {
+    display: none;
+  }
+}
+
+/* header-menu containers */
+
+#header-menu .menu-container {
+  position: relative;
+}
+
+/*******************************************************************************
+header-menu buttons and links
+*******************************************************************************/
+
+#header-menu a,
+#header-menu button {
+  display: flex;
+  align-items: center;
+  text-align: left;
+  width: 100%;
+  white-space: nowrap;
+}
+
+#header-menu a:hover,
+#header-menu button:hover {
+  text-decoration: underline;
+  text-underline-offset: .2em;
+  text-decoration-thickness: .05em;
+}
+
+#header-menu a::before,
+#header-menu button::before,
+#header-menu .expand-button::after {
+  content: "";
+  flex-shrink: 0;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 24px auto;
+  border-radius: 100%;
+  width: 40px;
+  height: 40px;
+}
+
+#language-menu-button::before {
+  background-image: url("../img/globe.svg");
+}
+
+#user-menu-button::before {
+  background-image: url("../img/user.svg");
+}
+
+#header-menu .expand-button::after {
+  background-image: url("../img/chevron.svg");
+  transition: transform .3s;
+}
+
+#header-menu .expand-button[aria-expanded=true]::after {
+  transform: rotate(180deg);
+}
+
+/* small screen */
+@media (max-width: 1100px) {
+  #header-menu .expand-button {
+    font-weight: bold;
+  }
+  #header-menu .expand-button::after {
+    display: none;
+  }
+}
+
+/* limit expand-button text width */
+
+#header-menu .expand-button .button-text {
+  max-width: 20vw;
+  padding-left:5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@media (max-width: 1100px) {
+  #header-menu .expand-button .button-text {
+    max-width: 80vw;
+  }
+}
+
+/*******************************************************************************
+collapsable-menu
+*******************************************************************************/
+
+#header-menu .collapsable-menu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* large screen */
+@media (min-width: 1101px) {
+  #header-menu .collapsable-menu {
+    position: absolute;
+    min-width: 100%;
+    border: 1px solid;
+    padding: 15px;
+    background: #fff;
+    z-index: 10;
+  }
+  #user-menu-content {
+    min-width: 160px;
+  }
+  #header-menu .collapsable-menu:not(.expanded) {
+    display: none;
+  }
+}
+
+/* small screen */
+@media (max-width: 1100px) {
+  #header-menu .collapsable-menu {
+    margin-left: 30px;
+  }
+}
+
+#header-menu .collapsable-menu a,
+#header-menu .collapsable-menu button {
+  padding: 5px 0;
+}
+
+/* menu item icons */
+
+#user-menu .log-out::before {
+  background-image: url("../img/log-out.svg");
+}
+
+/* language checkmark icon (dependent on html lang) */
+
+html[lang="nb"] #language-menu .nb::before {
+  background-image: url("../img/check.svg");
+}
+html[lang="no"] #language-menu .no::before {
+  background-image: url("../img/check.svg");
+}
+
+html[lang="en"] #language-menu .en::before {
+  background-image: url("../img/check.svg");
+}
+
+
+/*******************************************************************************
+UiO App
+Footer styles
+*******************************************************************************/
+
+#app-footer {
+  background-color: #000;
+  padding-top: 50px;
+  padding-bottom: 25px;
+  font-size: 1rem;
+}
+
+#app-footer * {
+  color: #fff;
+}
+
+#app-footer a {
+  display: block;
+  margin-bottom: 5px;
+}
+
+#app-footer a:hover {
+  text-decoration: none;
+}
+
+/* app name */
+
+#footer-appname {
+  font-size: 2rem;
+  line-height: 1.2;
+  margin-bottom: 50px;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+  overflow-wrap: break-word;
+}
+/* small screen */
+@media (max-width: 1100px) {
+  #footer-appname {
+    font-size: 2.3rem;
+  }
+}
+
+/* content */
+
+#app-footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-column-gap: 20px;
+  grid-row-gap: 40px;
+}
+
+#app-footer-content ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#app-footer-content h2 {
+  font-size: 0.8rem;
+  font-weight: normal;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  margin: 0 0 10px;
+}
+
+/* uio logo */
+
+#app-footer .app-global-wrapper::after {
+  content: "";
+  background: url("../img/uio-logo-full-no-neg.svg") no-repeat;
+  background-size: contain;
+  display: block;
+  height: 62px;
+  margin-top: 80px;
+}
+
+/* english logo. set from lang attribute. */
+html[lang="en"] #app-footer .app-global-wrapper::after {
+  background-image: url("../img/uio-logo-full-en-neg.svg");
+}
+
+
+/* End of UIO customizations */
+
+
+
+
+.authenticator-logo {
+  float:left;
+  width: 20px;
+  padding-right:5px;
+}
+
+
+
+#login-footer {
+  margin-top: 10px;
+
+  width: 100%;
+  flex-shrink: 0;
+  background: #000;
+  position:  absolute;
+  bottom:0px;
+
+
+}
+
+#login-footer > div {
+  padding: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+#login-footer #uio-text-segl {
+  width: 12.59375rem;
+  height: 3.875rem;
+  flex-shrink: 0;
+}
+
+#login-footer #help-user-guides {
+  color: #FFF;
+  font-size: 20px;
+}
+
+.login-pf {
+  background: none;
+}
+
+.login-pf body {
+  margin: 0;
+  font-size: 1.8rem;
+  /* font-smoothing is macOS only. may not be ideal for all fonts. test. */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;    background: white;
+  /*
+  background: url("../img/uio-logo.png") no-repeat center center fixed;
+  background-position: top left;
+
+  background-size: cover;
+  */
+  height: 100%;
+  font-family: helvetica, arial, sans-serif;
+  line-height: 1.5;
+  background-color: #f5f5f5;
+}
+
+.login-pf a {
+  text-decoration: underline;
+  font-size: 1rem;
+}
+
+.pf-c-alert {
+  font-size: 1rem;
+  margin: 15px 0;
+}
+
+#loginRestartLink {
+  text-decoration: none;
+  border: 1px solid;
+  padding: 7px 15px;
+  display: block;
+  width: fit-content;
+  border-radius: 5px;
+}
+
+#reset-login {
+  display: none;
+}
+
+.pf-c-form__label {
+  margin-bottom: 5px;
+}
+
+input.pf-c-form-control,
+input.pf-c-button {
+  font-size: var(--pf-global--FontSize--lg);
+  padding: 7px 15px;
+  height: auto;
+}
+
+input.pf-c-form-control:focus,
+input.pf-c-form-control[aria-invalid=true] {
+  padding-bottom: 6px;
+}
+
+input.pf-c-button:focus {
+  outline-offset: 3px;
+}
+
+textarea.pf-c-form-control {
+  height: auto;
+}
+
+p.instruction {
+  margin: 15px 0;
+  font-size: 1rem;
+}
+
+.pf-c-button.pf-m-primary {
+  background-color: black;
+  border-radius: 5px;
+  color: white;
+  width: auto;
+}
+
+h1,
+h2 {
+  font-weight: normal;
+}
+h1 {
+  margin-top: 0;
+}
+
+[class*="col-"] {
+  float: none;
+  padding: 0;
+  margin: 0;
+}
+
+h1#kc-page-title {
+  margin: 0;
+  font-weight: normal;
+  line-height: 1.3;
+}
+
+#kc-locale {
+  position: relative;
+  top: -3px;
+  align-self: center;
+}
+
+#kc-locale-dropdown:focus-within ul,
+#kc-locale-dropdown:hover ul {
+  display:block;
+  top: -20px;
+}
+
+#kc-locale ul {
+  background-color: var(--pf-global--BackgroundColor--100);
+  display: none;
+  top: 20px;
+  min-width: 100px;
+  padding: 0;
+}
+
+#kc-locale-dropdown a {
+  font-size: 1rem;
+}
+
+a#kc-current-locale-link::after {
+  content: "\2c5";
+  margin-left: var(--pf-global--spacer--xs)
+}
+
+
+#kc-info-message,a {
+  font-size: 1.2rem;
+  color: black;
+}
+
+.login-pf-page {
+  padding-top:0px;
+  margin-bottom: 10px;
+}
+
+.login-pf .container {
+  padding-top: 40px;
+}
+
+#kc-logo {
+  width: 100%;
+}
+
+.2fa-title {
+  font-size: 20px;
+}
+
+div.uio-logo {
+  /*
+  background-image: url(../img/uio-logo.png);
+  background-repeat: no-repeat;
+  width: 350px;
+  */
+  height: 110px;
+  margin: 0 auto;
+  padding-top: 100px;
+  text-decoration-color: black;
+  font-family: Helvetica,Arial,sans-serif;
+}
+
+#kc-header {
+  color: #ededed;
+  overflow: visible;
+  white-space: nowrap;
+}
+
+#kc-header-wrapper {
+  /*
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  padding: 62px 10px 20px;
+  white-space: normal;
+  color:black;
+
+  */
+  font-size: 40px;
+  line-height: 1.2em;
+  text-decoration-color: black;
+}
+
+#kc-content {
+  width: 100%;
+}
+
+#kc-attempted-username {
+  font-size: 30px;
+  font-family: inherit;
+  font-weight: normal;
+  padding-right: 10px;
+}
+
+#kc-webauthn-settings-form {
+  padding-top: 8px;
+}
+
+#kc-form-webauthn .select-auth-box-parent {
+  pointer-events: none;
+}
+
+#kc-form-webauthn .select-auth-box-desc {
+  color: var(--pf-global--palette--black-600);
+}
+
+#kc-form-webauthn .select-auth-box-headline {
+  color: orange;
+}
+
+#kc-form-webauthn .select-auth-box-icon {
+  flex: 0 0 3em;
+}
+
+#kc-form-webauthn .select-auth-box-icon-properties {
+  margin-top: 10px;
+  font-size: 1.8em;
+}
+
+#kc-form-webauthn .select-auth-box-icon-properties.unknown-transport-class {
+  margin-top: 3px;
+}
+
+#kc-form-webauthn .pf-l-stack__item {
+  margin: -1px 0;
+}
+
+#kc-content-wrapper {
+  margin-top: 20px;
+}
+
+#kc-info-wrapper {
+  font-size: 1rem;
+}
+
+#kc-form-options span {
+  display: block;
+}
+
+#kc-form-options .checkbox {
+  font-size: 1rem;
+}
+
+#kc-terms-text {
+  margin-bottom: 20px;
+}
+
+#kc-registration-container {
+  border-top: 1px dashed #aaa;
+  padding-top: 10px;
+  margin-top: 40px;
+}
+
+#kc-registration {
+  margin-bottom: 0;
+}
+
+#kc-registration-terms-text p {
+  margin: 0;
+}
+
+/* TOTP */
+
+input#totp {
+  font-size: 1.5rem;
+  letter-spacing: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1rem;
+  margin: 10px 0;
+}
+
+.pf-c-form__helper-text {
+  display: block;
+  margin: 10px 0;
+  font-weight: bold;
+}
+
+.required {
+  color: var(--pf-global--danger-color--200);
+}
+
+ol#kc-totp-settings {
+  margin: 0;
+  padding-left: 20px;
+  font-size: 1rem;
+}
+
+ol#kc-totp-settings > li {
+  margin-bottom: 20px;
+}
+
+ol#kc-totp-settings ul {
+  margin: 0;
+  list-style: disc;
+  padding-left: 20px;
+}
+
+ol#kc-totp-settings p {
+  margin: 0;
+}
+
+#kc-totp-secret-qr-code {
+  max-width: 150px;
+  max-height: 150px;
+}
+
+#kc-totp-secret-key {
+  display: block;
+  border: 1px dashed;
+  padding: 5px 10px;
+  margin: 10px 0px;
+}
+
+/* OAuth */
+
+#kc-oauth h3 {
+  margin-top: 0;
+}
+
+#kc-oauth ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+#kc-oauth ul li {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 12px;
+  padding: 10px 0;
+}
+
+#kc-oauth ul li:first-of-type {
+  border-top: 0;
+}
+
+#kc-oauth .kc-role {
+  display: inline-block;
+  width: 50%;
+}
+
+/* Code */
+#kc-code textarea {
+  width: 100%;
+  height: 8em;
+}
+
+/* Social */
+
+.kc-social-section {
+  margin-top: 40px;
+}
+
+.kc-social-section hr {
+  margin-bottom: 10px;
+  border-top: 1px dashed #aaa;
+}
+
+.kc-social-section h4, /* Temp. Should be h2 */
+.kc-social-section h2 {
+  font-size: 1rem;
+  font-weight: normal;
+  margin: 0 0 20px 0;
+  line-height: 1.5;
+}
+
+.kc-social-section button.expand {
+  font-size: 1rem;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0 0 10px 0;
+}
+
+.kc-social-section button.expand::before {
+  font-family: 'FontAwesome';
+  content: "\f138";
+  display: inline-block;
+  margin-right: 6px;
+  transition: all .3s;
+}
+
+.kc-social-section button.expand.open::before {
+  rotate: 90deg;
+}
+
+.kc-social-links {
+  display: none;
+}
+
+.kc-social-links.open {
+  display: block;
+}
+
+.kc-social-links li {
+  margin-bottom: 15px;
+}
+
+.kc-social-section .kc-social-links a {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  border: 1px solid #888;
+  border-radius: 5px;
+  padding: 10px 15px;
+  text-decoration: none;
+  white-space: normal;
+}
+
+.kc-social-links a::after {
+  display: none; /* border-decoration */
+}
+
+.kc-social-provider-name {
+  text-align: left;
+}
+
+.kc-social-provider-logo {
+  flex-basis: 60px; /* May need tweaking per logo */
+  flex-shrink: 0;
+  order: 2; /* Move after text */
+  background-repeat: no-repeat;
+  background-position: right center;
+  background-size: contain;
+}
+
+.kc-social-provider-logo::before {
+  display: none;
+}
+
+#social-feide .kc-social-provider-logo {
+  background-image: url("../img/feide.svg");
+}
+
+#social-webid .kc-social-provider-logo{
+  background-image: url("../img/webid-logo.png");
+}
+
+#social-guest .kc-social-provider-logo{
+  background-image: url("../img/webid-logo.png");
+}
+
+/* Temp. Move to HTML */
+/*
+.kc-social-provider-name::before {
+content: "Logg inn med ";
+}
+[lang="en"] .kc-social-provider-name::before {
+content: "Log in with ";
+}
+*/
+
+
+.kc-social-grid {
+  display:grid;
+  grid-column-gap: 10px;
+  grid-row-gap: 5px;
+  grid-column-end: span 6;
+  --pf-l-grid__item--GridColumnEnd: span 6;
+}
+
+.kc-social-grid .kc-social-icon-text {
+  left: -10px;
+}
+
+.kc-login-tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.kc-login-tooltip .kc-tooltip-text{
+  top:-3px;
+  left:160%;
+  background-color: black;
+  visibility: hidden;
+  color: #fff;
+
+  min-width:130px;
+  text-align: center;
+  border-radius: 2px;
+  box-shadow:0 1px 8px rgba(0,0,0,0.6);
+  padding: 5px;
+
+  position: absolute;
+  opacity:0;
+  transition:opacity 0.5s;
+}
+
+/* Show tooltip */
+.kc-login-tooltip:hover .kc-tooltip-text {
+  visibility: visible;
+  opacity:0.7;
+}
+
+.pf-c-button .pf-m-control .pf-m-block .kc-social-item .kc-social-gray{
+  width: 200%;
+  background-repeat: no-repeat;
+}
+
+/* Arrow for tooltip */
+.kc-login-tooltip .kc-tooltip-text::after {
+  content: " ";
+  position: absolute;
+  top: 15px;
+  right: 100%;
+  margin-top: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: transparent black transparent transparent;
+}
+
+@media (min-width: 768px) {
+  #kc-container-wrapper {
+    position: absolute;
+    width: 100%;
+  }
+
+  .login-pf .container {
+    padding-right: 80px;
+  }
+
+  .login-pf-page .login-pf-page-header {
+    margin-bottom: 0px;
+  }
+}
+
+@media (max-width: 767px) {
+
+  .login-pf body {
+  }
+
+  #kc-header {
+    padding-left: 15px;
+    padding-right: 15px;
+    float: none;
+    text-align: left;
+  }
+
+  #kc-header-wrapper {
+    font-size: 16px;
+    font-weight: bold;
+    /* padding: 20px 60px 0 0; */
+    color: #000000;
+    letter-spacing: 0;
+  }
+
+  div.uio-logo {
+    margin: 0;
+    width: 350px;
+    height: 150px;
+    background-size: 100%;
+  }
+
+  #kc-form {
+    float: none;
+  }
+
+  #kc-info-wrapper {
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: transparent;
+  }
+
+  .login-pf .container {
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
+}
+
+@media (min-height: 646px) {
+  #kc-container-wrapper {
+    bottom: 12%;
+  }
+}
+
+@media (max-height: 645px) {
+  #kc-container-wrapper {
+    padding-top: 50px;
+    top: 20%;
+  }
+}
+
+.card-pf form.form-actions .btn {
+  float: right;
+  margin-left: 10px;
+}
+
+#kc-form-buttons {
+  margin-top: 20px;
+  margin-bottom:20px;
+}
+
+.login-pf-page .login-pf-brand {
+  margin-top: 0px;
+  max-width: 360px;
+  width: 40%;
+  padding-top: 0px;
+}
+
+.select-auth-box-arrow{
+  display: flex;
+  align-items: center;
+  margin-right: 2rem;
+}
+
+.select-auth-box-icon{
+  display: flex;
+  flex: 0 0 2em;
+  justify-content: center;
+  margin-right: 1rem;
+  margin-left: 3rem;
+}
+
+.select-auth-box-parent{
+  border-top: 1px solid var(--pf-global--palette--black-200);
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  cursor: pointer;
+}
+
+.select-auth-box-parent:hover{
+  background-color: #f7f8f8;
+}
+
+.select-auth-container {
+  padding-bottom: 0px !important;
+}
+
+.select-auth-box-headline {
+  font-size: var(--pf-global--FontSize--md);
+  color: black;
+  font-weight: bold;
+}
+
+.select-auth-box-desc {
+  font-size: var(--pf-global--FontSize--sm);
+}
+
+.select-auth-box-paragraph {
+  text-align: center;
+  font-size: var(--pf-global--FontSize--md);
+  margin-bottom: 5px;
+}
+
+.card-pf {
+  margin: 0 auto;
+  margin-top: 50px;
+  margin-bottom: 60px;
+  box-shadow: var(--pf-global--BoxShadow--md);
+  padding: 30px;
+  max-width: 500px;
+  border: none;
+}
+
+@media (max-width: 500px) {
+  .card-pf {
+    padding: 30px 15px;
+  }
+}
+
+/*phone*/
+@media (max-width: 767px) {
+
+  /* will not execute, remove eventually
+  .login-pf-page .card-pf {
+  max-width: none;
+  margin-left: 0;
+  margin-right: 0;
+  margin-bottom:20px;
+  padding-top: 0;
+  border-top: 0;
+  box-shadow: 0 0;
+  }
+  */
+
+  .kc-social-grid {
+    grid-column-end: 12;
+    --pf-l-grid__item--GridColumnEnd: span 12;
+  }
+
+  .kc-social-grid .kc-social-icon-text {
+    left: -15px;
+  }
+}
+
+.login-pf-page .login-pf-signup {
+  font-size: 60px;
+  color: #;
+}
+
+.login-pf-page .card-pf {
+  margin-bottom: 30px;
+}
+#kc-content-wrapper .row {
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.login-pf-page.login-pf-page-accounts {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login-pf-page .btn-primary {
+  margin-top: 0;
+}
+
+.login-pf-page .list-view-pf .list-group-item {
+  border-bottom: 1px solid #ededed;
+}
+
+.login-pf-page .list-view-pf-description {
+  width: 100%;
+}
+
+.card-pf .form-group {
+  font-size: 1rem;
+  margin: 0 0 20px;
+}
+
+#kc-form-login div.form-group:last-of-type,
+#kc-register-form div.form-group:last-of-type,
+#kc-update-profile-form div.form-group:last-of-type,
+#kc-update-email-form div.form-group:last-of-type{
+  margin-bottom: 0px;
+  padding-bottom:5px;
+}
+
+.no-bottom-margin {
+  margin-bottom: 0;
+}
+
+#kc-back {
+  margin-top: 5px;
+}
+
+/* Recovery codes */
+.kc-recovery-codes-warning {
+  margin-bottom: 32px;
+}
+.kc-recovery-codes-warning .pf-c-alert__description p {
+  font-size: 0.875rem;
+}
+.kc-recovery-codes-list {
+  list-style: none;
+  columns: 2;
+  margin: 16px 0;
+  padding: 16px 16px 8px 16px;
+  border: 1px solid #D2D2D2;
+}
+.kc-recovery-codes-list li {
+  margin-bottom: 8px;
+  font-size: 11px;
+}
+.kc-recovery-codes-list li span {
+  color: #6A6E73;
+  width: 16px;
+  text-align: right;
+  display: inline-block;
+  margin-right: 1px;
+}
+
+.kc-recovery-codes-actions {
+  margin-bottom: 24px;
+}
+.kc-recovery-codes-actions button {
+  padding-left: 0;
+}
+.kc-recovery-codes-actions button i {
+  margin-right: 8px;
+
+}
+
+.kc-recovery-codes-confirmation {
+  align-items: baseline;
+  margin-bottom: 16px;
+}
+/* End Recovery codes */
+
+
+/* Password requirements */
+
+.passRequirements {
+  display: none; /* Default hidden */
+}
+
+#input-error-password + .passRequirements {
+  display: block; /* Display if error */
+}
+
+.passRequirements p {
+  margin: 10px 0;
+}
+
