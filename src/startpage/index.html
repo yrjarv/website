@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Startpage</title>
+        <style>
+            * {
+                font-family: "monospace";
+            }
+        </style>
+    </head>
+    <body>
+        <h2 id="2000">IN2000</h2>
+        <ul>
+            <li>
+                <a href="https://www-int.uio.no/studier/emner/matnat/ifi/IN2000/v26/">
+                    Semester page
+                </a>
+            </li>
+            <li>
+                <a href="https://tp.educloud.no/uio/app/schedule?semester=26v&scheduleType=course&filterOpen=false&summary=true&tab=calendar&course=IN2000%C2%A41">
+                    Timeplan
+                </a>
+            </li>
+        </ul>
+        <h2 id="3240">IN3240</h2>
+        <ul>
+            <li>
+                <a href="https://www.uio.no/studier/emner/matnat/ifi/IN3240/v26/index.html">
+                    Semester page
+                </a>
+            </li>
+            <li>
+                <a href="https://tp.educloud.no/uio/app/schedule?semester=26v&scheduleType=course&filterOpen=false&summary=true&tab=calendar&course=IN3240%C2%A41">
+                    Timeplan
+                </a>
+            </li>
+        </ul>
+
+        <h2 id="exam">Exams</h2>
+        <p id="1010exam1"></p>
+        <p id="2000exam"></p>
+        <p id="1010exam2"></p>
+        <p id="3240exam"></p>
+        <script>
+            function examCountdown(id, title, date) {
+                const end = new Date(date);
+                setInterval(() => {
+                    const t = end - new Date();
+                    if (t <= 0) return document.getElementById(id).textContent = "";
+                    const d = Math.floor(t/864e5),
+                        h = Math.floor(t/36e5)%24,
+                        m = Math.floor(t/6e4)%60,
+                        s = Math.floor(t/1e3)%60;
+                    document.getElementById(id).textContent = `${title} in ${d}d ${h}h ${m}m ${s}s`;
+                }, 1);
+            }
+            examCountdown("1010exam1", "IN1010", "2026-03-20T15:00:00")
+            examCountdown("2000exam", "IN2000", "2026-05-29T09:00:00")
+            examCountdown("1010exam2", "IN1010", "2026-05-29T15:00:00")
+            examCountdown("3240exam", "IN3240", "2026-06-05T15:00:00")
+
+        </script>
+</html>
