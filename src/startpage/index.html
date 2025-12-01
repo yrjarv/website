@@ -6,36 +6,47 @@
             * {
                 font-family: "monospace";
             }
+            body {
+                margin: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+
+                background-color: black;
+                color: white;
+            }
+            a, hr {
+                color: white;
+            }
         </style>
     </head>
     <body>
         <h2 id="2000">IN2000</h2>
-        <ul>
-            <li>
-                <a href="https://www-int.uio.no/studier/emner/matnat/ifi/IN2000/v26/">
-                    Semester page
-                </a>
-            </li>
-            <li>
-                <a href="https://tp.educloud.no/uio/app/schedule?semester=26v&scheduleType=course&filterOpen=false&summary=true&tab=calendar&course=IN2000%C2%A41">
-                    Timeplan
-                </a>
-            </li>
-        </ul>
-        <h2 id="3240">IN3240</h2>
-        <ul>
-            <li>
-                <a href="https://www.uio.no/studier/emner/matnat/ifi/IN3240/v26/index.html">
-                    Semester page
-                </a>
-            </li>
-            <li>
-                <a href="https://tp.educloud.no/uio/app/schedule?semester=26v&scheduleType=course&filterOpen=false&summary=true&tab=calendar&course=IN3240%C2%A41">
-                    Timeplan
-                </a>
-            </li>
-        </ul>
+        <p>
+            <a href="https://www-int.uio.no/studier/emner/matnat/ifi/IN2000/v26/">
+                Semester page
+            </a>
+        </p>
+        <p>
+            <a href="https://tp.educloud.no/uio/app/schedule?semester=26v&scheduleType=course&filterOpen=false&summary=true&tab=calendar&course=IN2000%C2%A41">
+                Timeplan
+            </a>
+        </p>
 
+        <hr>
+        <h2 id="3240">IN3240</h2>
+        <p>
+            <a href="https://www.uio.no/studier/emner/matnat/ifi/IN3240/v26/index.html">
+                Semester page
+            </a>
+        </p>
+        <p>
+            <a href="https://tp.educloud.no/uio/app/schedule?semester=26v&scheduleType=course&filterOpen=false&summary=true&tab=calendar&course=IN3240%C2%A41">
+                Timeplan
+            </a>
+        </p>
+
+        <hr>
         <h2 id="exam">Exams</h2>
         <p id="1010exam1"></p>
         <p id="2000exam"></p>
@@ -60,4 +71,5 @@
             examCountdown("3240exam", "IN3240", "2026-06-05T15:00:00")
 
         </script>
+    </body>
 </html>
