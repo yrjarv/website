@@ -40,6 +40,7 @@ jobs:
           mkdir -p src
           pandoc arch-install-guide/README.md\
             -o src/arch-install-guide.html\
+            --metadata title="Arch Linux installation guide"
             --standalone
       - name: Setup Pages
         uses: actions/configure-pages@v5
