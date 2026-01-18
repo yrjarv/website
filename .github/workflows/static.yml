@@ -31,6 +31,16 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+      - name: Install pandoc
+        run: sudo apt-get update && sudo apt-get install -y pandoc
+      - name: Clone arch-install-guide
+        run: git clone https://github.com/yrjarv/arch-install-guide.git
+      - name: Build HTML from README.md
+        run: |
+          mkdir -p src
+          pandoc arch-install-guide/README.md\
+            -o src/arch-install-guide.html\
+            --standalone
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
